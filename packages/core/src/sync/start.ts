@@ -52,9 +52,17 @@ function createTransport(
   },
 ): CMSSyncTransport {
   if (mode === 'sse') {
+    const hasES =
+      typeof deps.eventSource !== 'undefined' ||
+      (typeof window !== 'undefined' && typeof window.EventSource !== 'undefined');
+    if (!hasES) {
+      // Fail-safe: if SSE isn't available, fall back to polling.
+      mode = 'polling';
+    } else {
     const sseOpts: SseTransportOptions = { url: `${stripTrailingSlash(deps.baseUrl)}/stream` };
     if (deps.eventSource) sseOpts.eventSource = deps.eventSource;
     return createSseTransport(sseOpts);
+    }
   }
 
   const pollOpts: PollingTransportOptions = { url: deps.baseUrl, intervalMs: deps.intervalMs };
