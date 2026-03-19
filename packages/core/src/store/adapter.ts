@@ -3,6 +3,12 @@ export type CMSRecord = Record<string, unknown>;
 export interface CMSAdapter {
   /** Read all persisted CMS values. */
   read(): CMSRecord;
+  /**
+   * Persist a single key update.
+   *
+   * When provided, the runtime will prefer this over writing the full document.
+   */
+  patch?: (key: string, value: unknown) => void | Promise<void>;
   /** Persist all CMS values. */
   write(values: CMSRecord): void;
 }

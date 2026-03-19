@@ -22,6 +22,10 @@ export function createCMSStore(adapter: CMSAdapter) {
       const prev = get().values;
       const next = { ...prev, [key]: value };
       set({ values: next });
+      if (adapter.patch) {
+        void adapter.patch(key, value);
+        return;
+      }
       adapter.write(next);
     },
     setValues(next) {
