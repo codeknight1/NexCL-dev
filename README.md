@@ -41,3 +41,25 @@ pnpm -r test
 - `pnpm test`: run all tests
 - `pnpm lint`: lint all workspaces
 
+## Postgres (Stage 4)
+
+DevCMS can persist via Prisma + PostgreSQL behind the demo API routes.
+
+- **Default**: file persistence to `cms/content.json`
+- **Postgres**: set `DEVCMS_STORAGE=postgres` and provide `DATABASE_URL`
+
+Example (PowerShell):
+
+```powershell
+$env:DEVCMS_STORAGE="postgres"
+$env:DATABASE_URL="postgresql://user:pass@localhost:5432/devcms?schema=public"
+pnpm --filter demo prisma:generate
+pnpm --filter demo prisma:migrate
+pnpm dev --filter demo
+```
+
+Rollback guidance:
+
+- Prefer `prisma migrate resolve` for marking migrations as rolled back/applied when needed.
+- For local development, you can reset with `prisma migrate reset` (this drops data).
+

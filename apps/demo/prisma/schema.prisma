@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CmsEntry {
+  id         String   @id @default(cuid())
+  key        String
+  namespace  String
+  path       String
+  locale     String?
+  value      Json
+  version    Int      @default(1)
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@unique([key, locale])
+  @@index([namespace])
+  @@index([path])
+  @@index([updatedAt])
+}
+

@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 
-import { readCmsDoc } from '../../../lib/cmsFileStore';
+import { getCmsStorage } from '../../../lib/cmsStorage';
 
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const doc = await readCmsDoc();
+  const doc = await getCmsStorage().readAll();
   return NextResponse.json(doc, { status: 200 });
 }
 

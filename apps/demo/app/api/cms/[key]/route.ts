@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { patchCmsKey } from '../../../../lib/cmsFileStore';
+import { getCmsStorage } from '../../../../lib/cmsStorage';
 
 export const runtime = 'nodejs';
 
@@ -25,7 +25,7 @@ export async function PATCH(
   const value = (body as any)?.value as unknown;
 
   try {
-    await patchCmsKey(canonical, value);
+    await getCmsStorage().patchKey(canonical, value);
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Unknown error';
