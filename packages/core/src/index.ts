@@ -7,6 +7,7 @@ export type { CMSAdapter, CMSRecord, StorageLike } from './store/adapter';
 export { createLocalStorageAdapter, createMemoryAdapter } from './store/adapter';
 export type { HttpAdapterOptions } from './store/httpAdapter';
 export { createHttpAdapter } from './store/httpAdapter';
+export { initCMS } from './store/instance';
 
 export type { CMSFieldType, CMSSetter, UseCMSOptions } from './hooks/useCMS';
 export { useCMS } from './hooks/useCMS';
