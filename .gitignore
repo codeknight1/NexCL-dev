@@ -1,0 +1,21 @@
+node_modules
+.next
+dist
+.turbo
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env (never commit)
+.env
+.env.*
+
+# Editor
+.vscode
+.idea
+
