@@ -8,6 +8,10 @@ export { createLocalStorageAdapter, createMemoryAdapter } from './store/adapter'
 export type { HttpAdapterOptions } from './store/httpAdapter';
 export { createHttpAdapter } from './store/httpAdapter';
 export { initCMS } from './store/instance';
+export { hydrateCMS } from './store/hydrate';
+
+export type { CMSSyncMode, StartCMSSyncOptions } from './sync/start';
+export { startCMSSync } from './sync/start';
 
 export type { CMSFieldType, CMSSetter, UseCMSOptions } from './hooks/useCMS';
 export { useCMS } from './hooks/useCMS';
