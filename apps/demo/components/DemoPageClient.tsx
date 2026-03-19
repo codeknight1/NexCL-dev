@@ -6,9 +6,11 @@ import {
   createHttpAdapter,
   createLocalStorageAdapter,
   initCMS,
+  startCMSSync,
   useCMSEditMode,
 } from '@devcms/core';
 import { Pencil, PencilOff } from 'lucide-react';
+import { useEffect } from 'react';
 
 import { Button } from './ui/button';
 
@@ -24,6 +26,10 @@ initCMS({ adapter: getAdapter() });
 
 export function DemoPageClient() {
   const { isEditing, toggleEditMode } = useCMSEditMode();
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_DEVCMS_API !== '1') return;
+    return startCMSSync({ baseUrl: '/api/cms', mode: 'polling', intervalMs: 2000 });
+  }, []);
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
