@@ -4,6 +4,7 @@ dist
 .turbo
 .DS_Store
 Thumbs.db
+cms/content.json.tmp
 
 # Logs
 npm-debug.log*
