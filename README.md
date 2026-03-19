@@ -15,6 +15,15 @@ pnpm -r build
 pnpm -r test
 ```
 
+Windows PowerShell notes:
+
+```powershell
+pnpm -v
+pnpm install
+pnpm -r build
+pnpm -r test
+```
+
 ## Repo layout
 
 - `apps/demo`: Next.js demo app (Stage 2 will wire inline editing)
