@@ -28,7 +28,9 @@ export function DemoPageClient() {
   const { isEditing, toggleEditMode } = useCMSEditMode();
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_DEVCMS_API !== '1') return;
-    return startCMSSync({ baseUrl: '/api/cms', mode: 'polling', intervalMs: 2000 });
+    const mode =
+      process.env.NEXT_PUBLIC_DEVCMS_SYNC === 'sse' ? ('sse' as const) : ('polling' as const);
+    return startCMSSync({ baseUrl: '/api/cms', mode, intervalMs: 2000 });
   }, []);
 
   return (
