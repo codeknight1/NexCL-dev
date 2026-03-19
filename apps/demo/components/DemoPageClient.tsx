@@ -1,9 +1,26 @@
 'use client';
 
-import { InlineRichText, InlineText, useCMSEditMode } from '@devcms/core';
+import {
+  InlineRichText,
+  InlineText,
+  createHttpAdapter,
+  createLocalStorageAdapter,
+  initCMS,
+  useCMSEditMode,
+} from '@devcms/core';
 import { Pencil, PencilOff } from 'lucide-react';
 
 import { Button } from './ui/button';
+
+function getAdapter() {
+  // If enabled, persist inline edits to the dev API (cms/content.json).
+  // Otherwise, default to localStorage.
+  return process.env.NEXT_PUBLIC_DEVCMS_API === '1'
+    ? createHttpAdapter({ baseUrl: '/api/cms' })
+    : createLocalStorageAdapter();
+}
+
+initCMS({ adapter: getAdapter() });
 
 export function DemoPageClient() {
   const { isEditing, toggleEditMode } = useCMSEditMode();
@@ -47,6 +64,12 @@ export function DemoPageClient() {
           Hotkey: <kbd className="rounded border bg-zinc-50 px-2 py-1">Ctrl/Cmd</kbd> +{' '}
           <kbd className="rounded border bg-zinc-50 px-2 py-1">Shift</kbd> +{' '}
           <kbd className="rounded border bg-zinc-50 px-2 py-1">E</kbd>
+        </p>
+        <p className="mt-2">
+          Persistence:{' '}
+          <span className="font-medium">
+            {process.env.NEXT_PUBLIC_DEVCMS_API === '1' ? 'API (cms/content.json)' : 'localStorage'}
+          </span>
         </p>
       </footer>
     </main>
