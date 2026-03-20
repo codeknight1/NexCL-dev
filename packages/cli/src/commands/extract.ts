@@ -3,7 +3,11 @@ import path from 'node:path';
 
 import fg from 'fast-glob';
 
-import { buildSchemaFromFiles, type ExtractedSchema } from '../extractor/schemaBuilder';
+import {
+  buildSchemaFromFiles,
+  type ExtractedField,
+  type ExtractedSchema,
+} from '../extractor/schemaBuilder';
 
 export interface ExtractOptions {
   /** Project root (where apps/ and packages/ live). */
@@ -39,9 +43,10 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractedSche
 }
 
 function generateTypes(schema: ExtractedSchema): string {
-  const keys = Array.from(
-    new Set(schema.fields.map((f) => `${f.namespace ?? 'default'}:${f.path}`)),
-  ).sort();
+  const keySet = new Set(
+    schema.fields.map((f: ExtractedField) => `${f.namespace ?? 'default'}:${f.path}`),
+  );
+  const keys: string[] = Array.from<string>(keySet).sort();
 
   const keyUnion =
     keys.length === 0 ? 'never' : keys.map((k) => `'${k.replace(/'/g, "\\'")}'`).join(' | ');

@@ -1,5 +1,7 @@
-import type { ExtractedField, ExtractedSchema } from './types';
 import { extractFieldsFromFile } from './swcParser';
+import type { ExtractedField, ExtractedSchema } from './types';
+
+export type { ExtractedField, ExtractedSchema } from './types';
 
 export async function buildSchemaFromFiles(files: string[]): Promise<ExtractedSchema> {
   const fields: ExtractedField[] = [];
