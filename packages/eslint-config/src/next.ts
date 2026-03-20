@@ -1,6 +1,6 @@
 import next from '@next/eslint-plugin-next';
 
-import { react } from './react';
+import { react } from './react.ts';
 
 /**
  * DevCMS ESLint config for Next.js projects.

@@ -1,6 +1,6 @@
 import reactHooks from 'eslint-plugin-react-hooks';
 
-import { base } from './base';
+import { base } from './base.ts';
 
 /**
  * DevCMS ESLint config for React projects.
