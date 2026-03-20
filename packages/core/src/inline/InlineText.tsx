@@ -21,7 +21,7 @@ const EDIT_STYLE: React.CSSProperties = {
 export function InlineText(props: InlineTextProps) {
   const { isEditing } = useCMSEditMode();
   const [value, setValue] = useCMS(props.path, props.fallback ?? '', {
-    namespace: props.namespace,
+    ...(props.namespace ? { namespace: props.namespace } : {}),
     type: 'text',
   });
 

@@ -27,7 +27,13 @@ export function useCMS<T>(
   fallback: T,
   options?: UseCMSOptions,
 ): readonly [T, CMSSetter<T>] {
-  const key = useMemo(() => canonicalKey(path, { namespace: options?.namespace }), [path, options]);
+  const key = useMemo(
+    () =>
+      canonicalKey(path, {
+        ...(options?.namespace ? { namespace: options.namespace } : {}),
+      }),
+    [path, options?.namespace],
+  );
   const store = getCMSStore();
 
   const value = useStore(

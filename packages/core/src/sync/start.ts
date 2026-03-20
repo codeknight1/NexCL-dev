@@ -32,9 +32,9 @@ export function startCMSSync(opts?: StartCMSSyncOptions): () => void {
 
   const transport = createTransport(mode, {
     baseUrl,
-    intervalMs: opts?.intervalMs,
-    fetcher: opts?.fetcher,
-    eventSource: opts?.eventSource,
+    ...(typeof opts?.intervalMs === 'number' ? { intervalMs: opts.intervalMs } : {}),
+    ...(opts?.fetcher ? { fetcher: opts.fetcher } : {}),
+    ...(opts?.eventSource ? { eventSource: opts.eventSource } : {}),
   });
 
   return transport.start((snapshot) => {
@@ -65,7 +65,10 @@ function createTransport(
     }
   }
 
-  const pollOpts: PollingTransportOptions = { url: deps.baseUrl, intervalMs: deps.intervalMs };
+  const pollOpts: PollingTransportOptions = { url: deps.baseUrl };
+  if (typeof deps.intervalMs === 'number') {
+    pollOpts.intervalMs = deps.intervalMs;
+  }
   if (deps.fetcher) pollOpts.fetcher = deps.fetcher;
   return createPollingTransport(pollOpts);
 }
