@@ -1,7 +1,7 @@
 import { readFile, rename, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { validateKey, sanitizeRichText } from '@devcms/core';
+import { validateKey, sanitizeRichText } from '@devcms/core/server';
 
 export type CmsDoc = Record<string, unknown>;
 

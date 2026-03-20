@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { sanitizeRichText, validateKey } from '@devcms/core';
+import { sanitizeRichText, validateKey } from '@devcms/core/server';
 
 import type { CmsDoc, CmsStorage } from './types';
 
