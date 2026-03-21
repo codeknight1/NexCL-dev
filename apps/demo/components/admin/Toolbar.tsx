@@ -39,7 +39,9 @@ export function Toolbar(props: { context: ToolbarContext }) {
             className="h-9 w-full rounded-md border border-zinc-200 bg-zinc-50 pl-8 pr-3 text-sm outline-none ring-zinc-400 placeholder:text-zinc-400 focus:border-zinc-400 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950"
             placeholder="Filter by canonical key…"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
           />
         </div>
 
@@ -78,7 +80,9 @@ export function Toolbar(props: { context: ToolbarContext }) {
             type="button"
             variant="outline"
             size="sm"
-            onClick={() => setPage(Math.max(1, page - 1))}
+            onClick={() => {
+              setPage(Math.max(1, page - 1));
+            }}
             disabled={page <= 1}
           >
             Prev
@@ -87,7 +91,9 @@ export function Toolbar(props: { context: ToolbarContext }) {
             type="button"
             variant="outline"
             size="sm"
-            onClick={() => setPage(Math.min(pageCount, page + 1))}
+            onClick={() => {
+              setPage(Math.min(pageCount, page + 1));
+            }}
             disabled={page >= pageCount}
           >
             Next

@@ -23,7 +23,7 @@ export default function AdminCmsPage() {
     setError(null);
     try {
       const res = await fetch('/api/cms', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`HTTP ${String(res.status)}`);
       const json = (await res.json()) as CmsDoc;
       setData(json);
     } catch (e) {
@@ -62,7 +62,9 @@ export default function AdminCmsPage() {
     });
   };
 
-  const clearSelection = () => setSelectedKeys([]);
+  const clearSelection = () => {
+    setSelectedKeys([]);
+  };
 
   const upsertValue = (key: string, value: unknown) => {
     setData((prev) => ({ ...prev, [key]: value }));

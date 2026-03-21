@@ -29,6 +29,12 @@ This guide describes the **exact steps and order** to publish DevCMS packages to
 
 The **demo app** (`apps/demo`) is **private** and must **not** be published.
 
+**Inter-package dependency:** `@devcms/core` depends on `@devcms/types` with **`workspace:*`** in the repo so local `pnpm install` always links the workspace (and mirrors do not need `@devcms/types` on npm yet). When you run **`pnpm publish`**, pnpm **rewrites** `workspace:*` to the published semver in the tarball sent to npm.
+
+**Publish order:** publish **`@devcms/types` before `@devcms/core`**. Prefer **`pnpm publish`** (not plain `npm publish` from a package folder without rewriting).
+
+**Do not use `^0.1.0` for `@devcms/types` in `packages/core` unless that version already exists on your registry** — otherwise installs from a mirror (e.g. npmmirror) can 404 before first publish.
+
 ---
 
 ## Step-by-Step Release Process
@@ -67,11 +73,11 @@ Publish **one package at a time** from the repo root. Use `--access public` for 
 **Option A – Publish from root with filter (recommended)**
 
 ```bash
+# Types first (dependency of @devcms/core)
+pnpm --filter @devcms/types publish --access public
+
 # Core (used by most consumers)
 pnpm --filter @devcms/core publish --access public
-
-# Types (often a dependency of core)
-pnpm --filter @devcms/types publish --access public
 
 # CLI
 pnpm --filter @devcms/cli publish --access public

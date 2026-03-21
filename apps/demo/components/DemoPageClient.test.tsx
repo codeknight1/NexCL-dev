@@ -17,17 +17,21 @@ describe('DemoPageClient', () => {
 
     await user.click(screen.getByRole('button', { name: /enter edit mode/i }));
 
-    const inlineText = document.querySelector('[data-devcms-inline="text"]') as HTMLElement | null;
-    expect(inlineText).not.toBeNull();
-    inlineText!.textContent = 'Hello world';
-    fireEvent.input(inlineText!);
+    const inlineText = document.querySelector('[data-devcms-inline="text"]');
+    expect(inlineText).toBeInstanceOf(HTMLElement);
+    if (!(inlineText instanceof HTMLElement)) {
+      throw new Error('expected inline text element');
+    }
+    inlineText.textContent = 'Hello world';
+    fireEvent.input(inlineText);
 
-    const inlineRich = document.querySelector(
-      '[data-devcms-inline="rich-text"]',
-    ) as HTMLElement | null;
-    expect(inlineRich).not.toBeNull();
-    inlineRich!.innerHTML = `<p>Safe</p><img src="x" onerror="alert(1)" />`;
-    fireEvent.input(inlineRich!);
+    const inlineRich = document.querySelector('[data-devcms-inline="rich-text"]');
+    expect(inlineRich).toBeInstanceOf(HTMLElement);
+    if (!(inlineRich instanceof HTMLElement)) {
+      throw new Error('expected inline rich-text element');
+    }
+    inlineRich.innerHTML = `<p>Safe</p><img src="x" onerror="alert(1)" />`;
+    fireEvent.input(inlineRich);
 
     const raw = window.localStorage.getItem('devcms');
     expect(raw).toBeTruthy();

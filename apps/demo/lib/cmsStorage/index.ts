@@ -10,9 +10,7 @@ export function getCmsStorage(): CmsStorage {
   let storagePromise: Promise<CmsStorage> | null = null;
 
   const getPrismaStorage = async (): Promise<CmsStorage> => {
-    if (!storagePromise) {
-      storagePromise = import('./prisma').then((m) => m.createPrismaCmsStorage());
-    }
+    storagePromise ??= import('./prisma').then((m) => m.createPrismaCmsStorage());
     return storagePromise;
   };
 

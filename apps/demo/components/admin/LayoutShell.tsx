@@ -37,7 +37,9 @@ export function LayoutShell(props: LayoutShellProps) {
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => setDark((v) => !v)}
+              onClick={() => {
+                setDark((v) => !v);
+              }}
               aria-pressed={dark}
             >
               {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

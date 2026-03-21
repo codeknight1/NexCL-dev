@@ -7,9 +7,10 @@ import { buildSchemaFromFiles } from '../src/extractor/schemaBuilder';
 describe('devcms extract', () => {
   it('finds useCMS and Inline* usages in fixtures', async () => {
     const root = path.join(__dirname, 'fixtures', 'simple-app');
+    // Hero.tsx first so useCMS metadata (description) wins dedupe over page.tsx InlineText.
     const files = [
-      path.join(root, 'app', 'page.tsx'),
       path.join(root, 'components', 'Hero.tsx'),
+      path.join(root, 'app', 'page.tsx'),
     ];
 
     const schema = await buildSchemaFromFiles(files);

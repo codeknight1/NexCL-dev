@@ -12,7 +12,7 @@ function encodeSseComment(comment: string) {
   return `: ${comment}\n\n`;
 }
 
-export async function GET(req: Request) {
+export function GET(req: Request) {
   const { signal } = req;
 
   let lastJson: string | null = null;
@@ -21,7 +21,9 @@ export async function GET(req: Request) {
     async start(controller) {
       const encoder = new TextEncoder();
 
-      const send = (chunk: string) => controller.enqueue(encoder.encode(chunk));
+      const send = (chunk: string) => {
+        controller.enqueue(encoder.encode(chunk));
+      };
 
       // Initial snapshot.
       try {

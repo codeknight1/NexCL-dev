@@ -1,7 +1,11 @@
 {
   "name": "@devcms/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "prepublishOnly": "npm run build",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -17,6 +21,7 @@
   },
   "files": ["dist"],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "tsup",
     "test": "vitest run",
     "lint": "eslint .",

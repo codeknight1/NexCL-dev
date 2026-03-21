@@ -1,7 +1,10 @@
 {
   "name": "@devcms/eslint-config",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "exports": {
     "./base": "./src/base.ts",

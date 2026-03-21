@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { placeholder } from '../src';
+import { runExtract } from '../src';
 
 describe('cli smoke', () => {
-  it('exports placeholder', () => {
-    expect(placeholder).toBe(true);
+  it('exports runExtract', () => {
+    expect(typeof runExtract).toBe('function');
   });
 });
-

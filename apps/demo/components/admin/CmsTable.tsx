@@ -104,7 +104,9 @@ function CmsRowItem(props: {
           type="checkbox"
           className="h-3.5 w-3.5"
           checked={props.selected}
-          onChange={() => props.toggleSelect(props.row.key)}
+          onChange={() => {
+            props.toggleSelect(props.row.key);
+          }}
           aria-label={`Select ${props.row.key}`}
         />
       </td>
@@ -115,7 +117,9 @@ function CmsRowItem(props: {
         <textarea
           className="h-20 w-full resize-y rounded border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs font-mono text-zinc-800 outline-none ring-zinc-400 focus:border-zinc-400 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100"
           value={draft}
-          onChange={(e) => setDraft(e.target.value)}
+          onChange={(e) => {
+            setDraft(e.target.value);
+          }}
         />
       </td>
       <td className="px-3 py-2 text-right align-middle">

@@ -1,7 +1,10 @@
 {
   "name": "@devcms/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "devcms": "./dist/cli.js"
@@ -14,6 +17,7 @@
   },
   "files": ["dist"],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "tsup",
     "test": "vitest run",
     "lint": "eslint .",
